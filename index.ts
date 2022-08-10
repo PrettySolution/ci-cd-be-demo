@@ -5,7 +5,7 @@ const app: Express = express();
 const port = 3000;
 
 app.get('/api/', (req: Request, res: Response) => {
-  res.send(`curl 'http://localhost:80/fibonacci?n=43'`);
+  res.send(`curl 'http://localhost:80/fibonacci?n=43', PG_CREDENTIALS: ${process.env.PG_CREDENTIALS}`);
 });
 
 app.get('/api/ip', (req, res) => {
