@@ -4,8 +4,15 @@ import {networkInterfaces} from "os";
 const app: Express = express();
 const port = 3000;
 
+interface credential {
+  username: string,
+  password: string
+}
+
+const credential = JSON.parse(process.env.PG_CREDENTIALS || '{}') as credential
+
 app.get('/api/', (req: Request, res: Response) => {
-  res.send(`curl 'http://localhost:80/fibonacci?n=43', ${process.env.PG_USERNAME}, ${process.env.PG_PASSWORD}, ${process.env.PG_HOST}, ${process.env.PG_CREDENTIALS}`);
+  res.send(`curl 'http://localhost:80/fibonacci?n=43', ${credential.username}, ${credential.password}, ${process.env.PG_HOST}, ${process.env.PG_CREDENTIALS}`);
 });
 
 app.get('/api/ip', (req, res) => {
