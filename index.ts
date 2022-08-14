@@ -1,9 +1,12 @@
 import express, {Express, Request, Response} from 'express';
 import {networkInterfaces} from "os";
 import {INTEGER, Sequelize} from "sequelize";
+import cors from 'cors'
 
 const app: Express = express();
 const port = 3000;
+
+app.use(cors())
 
 const sequelize = new Sequelize(`postgres://postgres:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/postgres`)
 const Playlist = sequelize.define('table_name', {
