@@ -1,15 +1,35 @@
 import express, {Express, Request, Response} from 'express';
 import {networkInterfaces} from "os";
+import {INTEGER, Sequelize} from "sequelize";
 
 const app: Express = express();
 const port = 3000;
+
+const sequelize = new Sequelize(`postgres://postgres:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/postgres`)
+const Playlist = sequelize.define('table_name', {
+  id: {
+    field: 'column_1',
+    type: INTEGER,
+    primaryKey: true,
+
+  }
+}, {
+  timestamps: false
+})
 
 interface credential {
   username: string,
   password: string
 }
 
+
 const credential = JSON.parse(process.env.PG_CREDENTIALS || '{}') as credential
+
+app.get('/', (req: Request, res: Response) => {
+  Playlist.findAll().then((playlists)=>{
+      res.json(playlists)
+  })
+})
 
 app.get('/api/', (req: Request, res: Response) => {
   res.send(`curl 'http://localhost:80/fibonacci?n=43', ${credential.username}, ${credential.password}, ${process.env.PG_HOST}, ${process.env.PG_CREDENTIALS}`);
