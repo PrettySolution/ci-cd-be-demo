@@ -6,7 +6,9 @@ import cors from 'cors'
 const app: Express = express();
 const port = 3000;
 
-app.use(cors())
+app.use(cors({
+  origin: 'api.develop.therealme.io, api.therealme.io'
+}))
 
 const sequelize = new Sequelize(`postgres://postgres:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/postgres`)
 const Playlist = sequelize.define('table_name', {
