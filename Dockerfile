@@ -1,4 +1,4 @@
-FROM node:16.15.0 as build
+FROM public.ecr.aws/bitnami/node:16.15.1 as build
 WORKDIR /usr/src/app
 COPY . .
 RUN npm i --production=false
