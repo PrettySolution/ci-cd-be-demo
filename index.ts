@@ -7,7 +7,7 @@ const app: Express = express();
 const port = 3000;
 
 app.use(cors({
-  origin: 'api.develop.therealme.io, api.therealme.io'
+  origin: 'api.develop.therealme.io, api.therealme.io, develop.therealme.io, therealme.io'
 }))
 
 const sequelize = new Sequelize(`postgres://postgres:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:5432/postgres`)
