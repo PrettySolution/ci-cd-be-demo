@@ -37,6 +37,12 @@ app.get('/', (req: Request, res: Response) => {
   })
 })
 
+app.post('/', (req: Request, res: Response) => {
+  Playlist.findAll().then((playlists)=>{
+    res.json(playlists)
+  })
+})
+
 app.get('/api/', (req: Request, res: Response) => {
   res.send(`curl 'http://localhost:80/fibonacci?n=43', ${credential.username}, ${credential.password}, ${process.env.PG_HOST}, ${process.env.PG_CREDENTIALS}`);
 });
